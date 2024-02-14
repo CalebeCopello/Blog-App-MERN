@@ -20,7 +20,6 @@ const Header = () => {
 			<form>
 				<TextInput
 					type='text'
-					color={'gray'}
 					placeholder='Procurar...'
 					rightIcon={AiOutlineSearch}
 					shadow
@@ -29,7 +28,6 @@ const Header = () => {
 			</form>
 			<Button
 				className='w-12 h-10 lg:hidden'
-				color='gray'
 				pill
 			>
 				<AiOutlineSearch />
@@ -37,13 +35,12 @@ const Header = () => {
 			<div className='flex gap-2 md:order-2'>
 				<Button
 					className='w-12 h-10 hidden sm:inline'
-					color='gray'
 					pill
 				>
 					<FaMoon />
 				</Button>
 				<Link to='/sign-in'>
-					<Button color='gray'>Cadastrar-se</Button>
+					<Button>Cadastrar-se</Button>
 				</Link>
 				<Navbar.Toggle />
 			</div>
