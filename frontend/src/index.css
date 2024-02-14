@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+	font-family: JetBrainsMono;
+	src: url(./assets/fonts/JetBrainsMono.ttf);
+}
+
+@font-face {
+	font-family: Onest;
+	src: url(./assets/fonts/OnestSanSerif.ttf);
+}
+
+@font-face {
+	font-family: YoungSerif;
+	src: url(./assets/fonts/YoungSerif.ttf);
+}

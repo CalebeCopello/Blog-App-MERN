@@ -5,11 +5,13 @@ import Home from '../src/screens/Home'
 import Projects from '../src/screens/Projects'
 import SignIn from '../src/screens/SignIn'
 import SignUp from '../src/screens/SignUp'
+import Header from './components/Header'
 
 const App = () => {
 	return (
 		<>
 			<BrowserRouter>
+			<Header />
 				<Routes>
 					<Route
 						path='/'
