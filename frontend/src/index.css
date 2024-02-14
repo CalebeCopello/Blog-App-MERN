@@ -16,3 +16,7 @@
 	font-family: YoungSerif;
 	src: url(./assets/fonts/YoungSerif.ttf);
 }
+
+:root {
+  font-family: 'Onest';
+}

@@ -7,6 +7,21 @@ export default {
 		'node_modules/flowbite-react/lib/esm/**/*.js',
 	],
 	theme: {
+		colors: {
+			cyan: {
+				50: '#FDEDE2',
+				100: '#FCDECA',
+				200: '#F8BD96',
+				300: '#F59C61',
+				400: '#F17B2C',
+				500: '#D65D0E',
+				600: '#AC4C0B',
+				700: '#813908',
+				800: '#562606',
+				900: '#2B1303',
+				950: '#130801',
+			},
+		},
 		extend: {
 			colors: {
 				red0: '#cc241d',

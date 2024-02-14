@@ -19,13 +19,6 @@ const Header = () => {
 			{/* <DarkThemeToggle /> */}
 			<form>
 				<TextInput
-					theme={{
-						field: {
-							input: {
-								base: 'focus:!ring-orange1_dm focus:!border-orange1_dm',
-							},
-						},
-					}}
 					type='text'
 					color={'gray'}
 					placeholder='Procurar...'
@@ -35,7 +28,7 @@ const Header = () => {
 				/>
 			</form>
 			<Button
-				className='w-12 h-10'
+				className='w-12 h-10 lg:hidden'
 				color='gray'
 				pill
 			>
@@ -55,13 +48,22 @@ const Header = () => {
 				<Navbar.Toggle />
 			</div>
 			<Navbar.Collapse>
-				<Navbar.Link active={path == '/'}>
+				<Navbar.Link
+					active={path == '/'}
+					as={'div'}
+				>
 					<Link to='/'>Home</Link>
 				</Navbar.Link>
-				<Navbar.Link active={path == '/about'}>
+				<Navbar.Link
+					active={path == '/about'}
+					as={'div'}
+				>
 					<Link to='/about'>Sobre</Link>
 				</Navbar.Link>
-				<Navbar.Link active={path == '/projects'}>
+				<Navbar.Link
+					active={path == '/projects'}
+					as={'div'}
+				>
 					<Link to='/projects'>Projetos</Link>
 				</Navbar.Link>
 			</Navbar.Collapse>
