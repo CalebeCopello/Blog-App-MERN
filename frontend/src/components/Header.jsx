@@ -39,7 +39,7 @@ const Header = () => {
 				>
 					<FaMoon />
 				</Button>
-				<Link to='/sign-in'>
+				<Link to='/sign-up'>
 					<Button>Cadastrar-se</Button>
 				</Link>
 				<Navbar.Toggle />
