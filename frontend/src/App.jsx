@@ -6,12 +6,13 @@ import Projects from '../src/screens/Projects'
 import SignIn from '../src/screens/SignIn'
 import SignUp from '../src/screens/SignUp'
 import Header from './components/Header'
+import FooterComponent from './components/Footer'
 
 const App = () => {
 	return (
 		<>
 			<BrowserRouter>
-			<Header />
+				<Header />
 				<Routes>
 					<Route
 						path='/'
@@ -38,6 +39,7 @@ const App = () => {
 						element={<Projects />}
 					/>
 				</Routes>
+				<FooterComponent />
 			</BrowserRouter>
 		</>
 	)
