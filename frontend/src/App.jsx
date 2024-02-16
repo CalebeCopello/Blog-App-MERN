@@ -22,11 +22,11 @@ const App = () => {
 						element={<About />}
 					/>
 					<Route
-						path='/sign-in'
+						path='/signin'
 						element={<SignIn />}
 					/>
 					<Route
-						path='/sign-up'
+						path='/signup'
 						element={<SignUp />}
 					/>
 					<Route

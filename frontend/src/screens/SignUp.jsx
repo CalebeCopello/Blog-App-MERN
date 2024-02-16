@@ -1,7 +1,43 @@
-import { Link } from 'react-router-dom'
-import { Label, TextInput, Button } from 'flowbite-react'
+import { Link, useNavigate } from 'react-router-dom'
+import { Label, TextInput, Button, Alert, Spinner } from 'flowbite-react'
+import { useState } from 'react'
 
 const SignUp = () => {
+	const navigate = useNavigate()
+	const [formData, setFormData] = useState({})
+	const [errorMessage, setErrorMessage] = useState(null)
+	const [loading, setLoading] = useState(false)
+	const handleChange = (e) => {
+		setFormData({ ...formData, [e.target.id]: e.target.value.trim() })
+		console.log(formData)
+		setErrorMessage(null)
+	}
+	console.log(formData)
+	const handleSubmit = async (e) => {
+		e.preventDefault()
+		if (!formData.username || !formData.email || !formData.password) {
+			return setErrorMessage('Preencha todos os campos')
+		}
+		try {
+			setLoading(true)
+			const res = await fetch('/api/auth/signup', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(formData),
+			})
+			const data = await res.json()
+			if (data.success === false) {
+				return setErrorMessage(data.message)
+			}
+			if(res.ok) {
+				navigate('/signin')
+			}
+		} catch (error) {
+			setErrorMessage(error.message)
+		} finally {
+			setLoading(false)
+		}
+	}
 	return (
 		<>
 			<div className='min-h-screen mt-20 '>
@@ -23,20 +59,26 @@ const SignUp = () => {
 						</p>
 					</div>
 					<div className='flex-1'>
-						<form className='flex flex-col gap-3'>
+						<form
+							className='flex flex-col gap-3'
+							onSubmit={handleSubmit}
+						>
 							<div>
 								<Label value='Nome de usuário' />
 								<TextInput
+									onChange={handleChange}
 									type='text'
 									placeholder='Username'
-									id='Usuário'
+									id='username'
 									required
 									shadow
+									addon='@'
 								/>
 							</div>
 							<div>
 								<Label value='E-mail' />
 								<TextInput
+									onChange={handleChange}
 									type='email'
 									placeholder='nome@email.com'
 									id='email'
@@ -47,6 +89,7 @@ const SignUp = () => {
 							<div>
 								<Label value='Senha' />
 								<TextInput
+									onChange={handleChange}
 									type='password'
 									placeholder='Password'
 									id='password'
@@ -54,7 +97,19 @@ const SignUp = () => {
 									shadow
 								/>
 							</div>
-							<Button type='submit'>Cadastrar</Button>
+							<Button
+								type='submit'
+								disabled={loading}
+							>
+								{loading ? (
+									<>
+										<Spinner size='sm' />{' '}
+										<span className='pl-3'>Carregando</span>
+									</>
+								) : (
+									'Cadastrar'
+								)}
+							</Button>
 						</form>
 						<div className='flex gap-3 text-sm mt-3'>
 							<span>Já tem uma conta?</span>
@@ -65,6 +120,15 @@ const SignUp = () => {
 								Logar-se
 							</Link>
 						</div>
+						{errorMessage && (
+							<Alert
+								className='mt-5'
+								color='failure'
+							>
+								{' '}
+								{errorMessage}{' '}
+							</Alert>
+						)}
 					</div>
 				</div>
 			</div>
