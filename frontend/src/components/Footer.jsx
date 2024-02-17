@@ -36,7 +36,7 @@ const FooterComponent = () => {
 									target='_blank'
 									rel='noopener noreferrer'
 								>
-									Calebe's Blog
+									{"Calebe's Blog"}
 								</Footer.Link>
 							</Footer.LinkGroup>
 						</div>
@@ -61,10 +61,13 @@ const FooterComponent = () => {
 						</div>
 					</div>
 				</div>
-                <Footer.Divider />
-                <div className="">
-                    <Footer.Copyright by='Calebe Copello' year={new Date().getFullYear()} />
-                </div>
+				<Footer.Divider />
+				<div className=''>
+					<Footer.Copyright
+						by='Calebe Copello'
+						year={new Date().getFullYear()}
+					/>
+				</div>
 			</div>
 		</Footer>
 	)
