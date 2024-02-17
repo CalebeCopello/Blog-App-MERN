@@ -114,7 +114,7 @@ const SignUp = () => {
 						<div className='flex gap-3 text-sm mt-3'>
 							<span>Já tem uma conta?</span>
 							<Link
-								to='/sign-in'
+								to='/signin'
 								className='text-orange0 hover:text-orange1_lm'
 							>
 								Logar-se
