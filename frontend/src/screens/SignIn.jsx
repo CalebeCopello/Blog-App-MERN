@@ -3,17 +3,16 @@ import { Label, TextInput, Button, Alert, Spinner } from 'flowbite-react'
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { signInStart, signInFailure, signInSuccess } from '../slices/userSlice'
+import OAuth from '../components/OAuth'
 
 const SignIn = () => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const [formData, setFormData] = useState({})
-	const {loading, error: errorMessage} = useSelector(state => state.user)
+	const { loading, error: errorMessage } = useSelector((state) => state.user)
 	const handleChange = (e) => {
 		setFormData({ ...formData, [e.target.id]: e.target.value.trim() })
-		console.log(formData)
 	}
-	console.log(formData)
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 		if (!formData.email || !formData.password) {
@@ -98,6 +97,7 @@ const SignIn = () => {
 									'Logar'
 								)}
 							</Button>
+							<OAuth />
 						</form>
 						<div className='flex gap-3 text-sm mt-3'>
 							<span>Ainda não tem uma conta?</span>
