@@ -9,26 +9,27 @@ import { useNavigate } from 'react-router-dom'
 const OAuth = () => {
 	const auth = getAuth(app)
 	const dispatch = useDispatch()
-    const navigate = useNavigate()
+	const navigate = useNavigate()
 	const handleGoogleOAuth = async () => {
 		const provider = new GoogleAuthProvider()
 		provider.setCustomParameters({ prompt: 'select_account' })
 		try {
 			const resultsFromGoogle = await signInWithPopup(auth, provider)
+			console.log(resultsFromGoogle)
 			const res = await fetch('/api/auth/google', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({
 					name: resultsFromGoogle.user.displayName,
 					email: resultsFromGoogle.user.email,
-					googlePhotoUrl: resultsFromGoogle.user.photoURL,
+					googlePhotoURL: resultsFromGoogle.user.photoURL,
 				}),
 			})
 			const data = await res.json()
-            console.log(data)
+			console.log(data)
 			if (res.ok) {
-                dispatch(signInSuccess(data))
-                navigate('/')
+				dispatch(signInSuccess(data))
+				navigate('/')
 			}
 		} catch (error) {
 			console.error(error)
