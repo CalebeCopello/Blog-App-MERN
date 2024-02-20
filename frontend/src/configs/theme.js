@@ -25,6 +25,10 @@ const navbarThemeConfig = {
 			off: '',
 		},
 	},
+	toggle: {
+		base: 'inline-flex items-center rounded-lg p-2 text-sm text-fg0_lm hover:bg-orange1_lm focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-fg0_dm dark:hover:bg-orange1_dm dark:focus:ring-gray-600 md:hidden',
+		icon: 'h-6 w-6 shrink-0',
+	},
 }
 
 export { textInputThemeConfig, buttonThemeConfig, navbarThemeConfig }
