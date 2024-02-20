@@ -5,7 +5,7 @@ const FooterComponent = () => {
 	return (
 		<Footer
 			container
-			className='border border-t-8 border-orange0'
+			className='border border-t-8 border-orange0 bg-bg1_lm dark:bg-bg2_dm'
 		>
 			<div className='w-full max-w-7xl mx-auto'>
 				<div className='grid w-full justify-between sm:flex md:grid-cols-1'>

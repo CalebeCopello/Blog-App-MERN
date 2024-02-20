@@ -1,14 +1,17 @@
 import { Navbar, TextInput, Button, Dropdown, Avatar } from 'flowbite-react'
 import { Link, useLocation } from 'react-router-dom'
 import { AiOutlineSearch } from 'react-icons/ai'
-import { FaMoon } from 'react-icons/fa'
-import { useSelector } from 'react-redux'
+import { FaMoon, FaSun } from 'react-icons/fa'
+import { useSelector, useDispatch } from 'react-redux'
+import { toggleTheme } from '../slices/themeSlice'
 
 const Header = () => {
 	const path = useLocation().pathname
+	const dispatch = useDispatch()
 	const { currentUser } = useSelector((state) => state.user)
+	const { theme } = useSelector((state) => state.theme)
 	return (
-		<Navbar className='border-b-2'>
+		<Navbar className='border-b-2 bg-bg1_lm dark:bg-bg2_dm'>
 			<Link
 				to='/'
 				className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold font-JetBrainsMono dark:text-fg0_lm:'
@@ -38,11 +41,13 @@ const Header = () => {
 				<Button
 					className='w-12 h-10 hidden sm:inline'
 					pill
+					onClick={() => dispatch(toggleTheme())}
 				>
-					<FaMoon />
+					{theme === 'light' ? <FaMoon /> : <FaSun /> }
 				</Button>
 				{currentUser ? (
 					<Dropdown
+					className='bg-bg0_h_lm dark:bg-bg1_dm'
 						arrowIcon={false}
 						inline
 						label={
@@ -55,14 +60,15 @@ const Header = () => {
 					>
 						<Dropdown.Header>
 							<span className='block text-sm'>@{currentUser.username}</span>
-							<span className='block text-sm font-medium truncate'>{currentUser.email}</span>
+							<span className='block text-sm font-medium truncate'>
+								{currentUser.email}
+							</span>
 						</Dropdown.Header>
 						<Dropdown.Header>
 							<Link to={'/dashboard?tab=profile'}>
 								<Dropdown.Item>Profile</Dropdown.Item>
 							</Link>
 							<Dropdown.Divider />
-
 							<Dropdown.Item>Deslogar</Dropdown.Item>
 						</Dropdown.Header>
 					</Dropdown>
