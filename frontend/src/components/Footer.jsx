@@ -22,8 +22,14 @@ const FooterComponent = () => {
 					</div>
 					<div className='grid grid-cols-2 gap-8 mt-4 sm:grid-cols-2 sm:gap-6'>
 						<div>
-							<Footer.Title title='Sobre' />
-							<Footer.LinkGroup col>
+							<Footer.Title
+								title='Sobre'
+								className='text-orange1_lm dark:text-orange1_dm'
+							/>
+							<Footer.LinkGroup
+								col
+								className='text-fg0_lm dark:text-fg0_dm'
+							>
 								<Footer.Link
 									href='http://www.calebecopello.com'
 									target='_blank'
@@ -41,8 +47,14 @@ const FooterComponent = () => {
 							</Footer.LinkGroup>
 						</div>
 						<div>
-							<Footer.Title title='Nos Siga' />
-							<Footer.LinkGroup col>
+							<Footer.Title
+								title='Nos Siga'
+								className='text-orange1_lm dark:text-orange1_dm'
+							/>
+							<Footer.LinkGroup
+								col
+								className='text-fg0_lm dark:text-fg0_dm'
+							>
 								<Footer.Link
 									href='http://www.github.com/calebecopello'
 									target='_blank'

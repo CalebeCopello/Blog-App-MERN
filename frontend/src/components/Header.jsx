@@ -4,6 +4,11 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import { FaMoon, FaSun } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleTheme } from '../slices/themeSlice'
+import {
+	buttonThemeConfig,
+	textInputThemeConfig,
+	navbarThemeConfig,
+} from '../configs/theme.js'
 
 const Header = () => {
 	const path = useLocation().pathname
@@ -11,7 +16,10 @@ const Header = () => {
 	const { currentUser } = useSelector((state) => state.user)
 	const { theme } = useSelector((state) => state.theme)
 	return (
-		<Navbar className='border-b-2 bg-bg1_lm dark:bg-bg2_dm'>
+		<Navbar
+			theme={navbarThemeConfig}
+			className='border-b-2 bg-bg1_lm dark:bg-bg2_dm'
+		>
 			<Link
 				to='/'
 				className='self-center whitespace-nowrap text-sm sm:text-xl font-semibold font-JetBrainsMono dark:text-fg0_lm:'
@@ -21,9 +29,9 @@ const Header = () => {
 				</span>
 				Blog
 			</Link>
-			{/* <DarkThemeToggle /> */}
 			<form>
 				<TextInput
+					theme={textInputThemeConfig}
 					type='text'
 					placeholder='Procurar...'
 					rightIcon={AiOutlineSearch}
@@ -32,6 +40,7 @@ const Header = () => {
 				/>
 			</form>
 			<Button
+				theme={buttonThemeConfig}
 				className='w-12 h-10 lg:hidden'
 				pill
 			>
@@ -39,15 +48,16 @@ const Header = () => {
 			</Button>
 			<div className='flex gap-2 md:order-2'>
 				<Button
+					theme={buttonThemeConfig}
 					className='w-12 h-10 hidden sm:inline'
 					pill
 					onClick={() => dispatch(toggleTheme())}
 				>
-					{theme === 'light' ? <FaMoon /> : <FaSun /> }
+					{theme === 'light' ? <FaMoon /> : <FaSun />}
 				</Button>
 				{currentUser ? (
 					<Dropdown
-					className='bg-bg0_h_lm dark:bg-bg1_dm'
+						className='bg-bg0_h_lm dark:bg-bg1_dm'
 						arrowIcon={false}
 						inline
 						label={
