@@ -7,6 +7,7 @@ import SignIn from '../src/screens/SignIn'
 import SignUp from '../src/screens/SignUp'
 import Header from './components/Header'
 import FooterComponent from './components/Footer'
+import PrivateRoute from './components/PrivateRoute'
 
 const App = () => {
 	return (
@@ -30,10 +31,12 @@ const App = () => {
 						path='/signup'
 						element={<SignUp />}
 					/>
-					<Route
-						path='/dashboard'
-						element={<Dashboard />}
-					/>
+					<Route element={<PrivateRoute />}>
+						<Route
+							path='/dashboard'
+							element={<Dashboard />}
+						/>
+					</Route>
 					<Route
 						path='/projects'
 						element={<Projects />}
