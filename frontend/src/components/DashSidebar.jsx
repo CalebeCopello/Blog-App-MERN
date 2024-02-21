@@ -3,8 +3,10 @@ import { Link, useLocation } from 'react-router-dom'
 import { Sidebar } from 'flowbite-react'
 import { sidebarThemeConfig } from '../configs/theme'
 import { HiArrowSmLeft, HiUser } from 'react-icons/hi'
+import { useSelector } from 'react-redux'
 
 const DashSidebar = () => {
+    const { currentUser } = useSelector((state) => state.user)
 	const location = useLocation()
 	const [tab, setTab] = useState('')
 	useEffect(() => {
@@ -17,7 +19,7 @@ const DashSidebar = () => {
 	return (
 		<Sidebar
 			theme={sidebarThemeConfig}
-			className='w-full md:w-56 '
+			className='w-full md:w-56'
 		>
 			<Sidebar.Items>
 				<Sidebar.ItemGroup>
@@ -25,7 +27,7 @@ const DashSidebar = () => {
 						<Sidebar.Item
 							active={tab === 'profile'}
 							icon={HiUser}
-							label={'User'}
+							label={'user'}
 							labelColor='dark'
 						>
 							Profile
