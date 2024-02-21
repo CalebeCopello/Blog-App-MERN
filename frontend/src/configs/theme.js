@@ -40,7 +40,6 @@ const navbarThemeConfig = {
 	},
 }
 
-// border-orange0 bg-bg1_lm dark:bg-bg2_dm
 
 const footerThemeConfig = {
 	root: {

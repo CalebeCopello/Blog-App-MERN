@@ -75,9 +75,10 @@ const FooterComponent = () => {
 						</div>
 					</div>
 				</div>
-				<Footer.Divider className='border-orange1_lm dark:border-orange1_dm'/>
+				<Footer.Divider className='border-orange1_lm dark:border-orange1_dm' />
 				<div className=''>
 					<Footer.Copyright
+						className='text-fg0_lm dark:text-fg0_dm'
 						by='Calebe Copello'
 						year={new Date().getFullYear()}
 					/>
