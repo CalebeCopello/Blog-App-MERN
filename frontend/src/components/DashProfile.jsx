@@ -67,7 +67,7 @@ const DashProfile = () => {
 				<input
 					type='file'
 					accept='image/*'
-					onClick={handleImageUpload}
+					onChange={handleImageUpload}
 					ref={filePickerRef}
 					hidden
 				/>
