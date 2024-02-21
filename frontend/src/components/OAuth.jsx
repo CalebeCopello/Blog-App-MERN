@@ -5,6 +5,7 @@ import { app } from '../firebase'
 import { useDispatch } from 'react-redux'
 import { signInSuccess } from '../slices/userSlice'
 import { useNavigate } from 'react-router-dom'
+import { buttonThemeConfig } from '../configs/theme.js'
 
 const OAuth = () => {
 	const auth = getAuth(app)
@@ -35,6 +36,7 @@ const OAuth = () => {
 	}
 	return (
 		<Button
+		theme={buttonThemeConfig}
 			type='button'
 			onClick={handleGoogleOAuth}
 		>

@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Label, TextInput, Button, Alert, Spinner } from 'flowbite-react'
 import { useState } from 'react'
 import OAuth from '../components/OAuth'
+import { buttonThemeConfig, textInputThemeConfig } from '../configs/theme.js'
 
 const SignUp = () => {
 	const navigate = useNavigate()
@@ -30,7 +31,7 @@ const SignUp = () => {
 			if (data.success === false) {
 				return setErrorMessage(data.message)
 			}
-			if(res.ok) {
+			if (res.ok) {
 				navigate('/signin')
 			}
 		} catch (error) {
@@ -67,6 +68,7 @@ const SignUp = () => {
 							<div>
 								<Label value='Nome de usuário' />
 								<TextInput
+									theme={textInputThemeConfig}
 									onChange={handleChange}
 									type='text'
 									placeholder='Username'
@@ -79,6 +81,7 @@ const SignUp = () => {
 							<div>
 								<Label value='E-mail' />
 								<TextInput
+									theme={textInputThemeConfig}
 									onChange={handleChange}
 									type='email'
 									placeholder='nome@email.com'
@@ -90,6 +93,7 @@ const SignUp = () => {
 							<div>
 								<Label value='Senha' />
 								<TextInput
+									theme={textInputThemeConfig}
 									onChange={handleChange}
 									type='password'
 									placeholder='Password'
@@ -99,6 +103,7 @@ const SignUp = () => {
 								/>
 							</div>
 							<Button
+								theme={buttonThemeConfig}
 								type='submit'
 								disabled={loading}
 							>

@@ -18,7 +18,7 @@ const Header = () => {
 	return (
 		<Navbar
 			theme={navbarThemeConfig}
-			className='border-b-2 bg-bg1_lm dark:bg-bg2_dm'
+			className='border-b-2'
 		>
 			<Link
 				to='/'

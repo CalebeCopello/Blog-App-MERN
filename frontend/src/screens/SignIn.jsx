@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { signInStart, signInFailure, signInSuccess } from '../slices/userSlice'
 import OAuth from '../components/OAuth'
+import { buttonThemeConfig, textInputThemeConfig } from '../configs/theme.js'
 
 const SignIn = () => {
 	const navigate = useNavigate()
@@ -65,6 +66,7 @@ const SignIn = () => {
 							<div>
 								<Label value='E-mail' />
 								<TextInput
+									theme={textInputThemeConfig}
 									onChange={handleChange}
 									type='email'
 									placeholder='nome@email.com'
@@ -76,6 +78,7 @@ const SignIn = () => {
 							<div>
 								<Label value='Senha' />
 								<TextInput
+									theme={textInputThemeConfig}
 									onChange={handleChange}
 									type='password'
 									placeholder='Password'
@@ -85,6 +88,7 @@ const SignIn = () => {
 								/>
 							</div>
 							<Button
+								theme={buttonThemeConfig}
 								type='submit'
 								disabled={loading}
 							>

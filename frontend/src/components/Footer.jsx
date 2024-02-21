@@ -1,11 +1,13 @@
 import { Footer } from 'flowbite-react'
 import { Link } from 'react-router-dom'
+import { footerThemeConfig } from '../configs/theme'
 
 const FooterComponent = () => {
 	return (
 		<Footer
 			container
-			className='border border-t-8 border-orange0 bg-bg1_lm dark:bg-bg2_dm'
+			className='border border-t-8'
+			theme={footerThemeConfig}
 		>
 			<div className='w-full max-w-7xl mx-auto'>
 				<div className='grid w-full justify-between sm:flex md:grid-cols-1'>
@@ -73,7 +75,7 @@ const FooterComponent = () => {
 						</div>
 					</div>
 				</div>
-				<Footer.Divider />
+				<Footer.Divider className='border-orange1_lm dark:border-orange1_dm'/>
 				<div className=''>
 					<Footer.Copyright
 						by='Calebe Copello'
