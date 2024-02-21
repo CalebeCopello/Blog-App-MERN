@@ -6,7 +6,7 @@ import { HiArrowSmLeft, HiUser } from 'react-icons/hi'
 import { useSelector } from 'react-redux'
 
 const DashSidebar = () => {
-    const { currentUser } = useSelector((state) => state.user)
+	const { currentUser } = useSelector((state) => state.user)
 	const location = useLocation()
 	const [tab, setTab] = useState('')
 	useEffect(() => {
@@ -27,7 +27,7 @@ const DashSidebar = () => {
 						<Sidebar.Item
 							active={tab === 'profile'}
 							icon={HiUser}
-							label={'user'}
+							label={currentUser.username}
 							labelColor='dark'
 						>
 							Profile
