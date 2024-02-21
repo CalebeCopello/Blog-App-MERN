@@ -29,6 +29,7 @@ const DashSidebar = () => {
 							icon={HiUser}
 							label={currentUser.username}
 							labelColor='dark'
+							as='div'
 						>
 							Profile
 						</Sidebar.Item>
