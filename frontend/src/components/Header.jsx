@@ -1,7 +1,14 @@
-import { Navbar, TextInput, Button, Dropdown, Avatar } from 'flowbite-react'
+import {
+	Navbar,
+	TextInput,
+	Button,
+	Dropdown,
+	Avatar,
+	DarkThemeToggle,
+} from 'flowbite-react'
 import { Link, useLocation } from 'react-router-dom'
 import { AiOutlineSearch } from 'react-icons/ai'
-import { FaMoon, FaSun } from 'react-icons/fa'
+// import { FaMoon, FaSun } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleTheme } from '../slices/themeSlice'
 import {
@@ -14,7 +21,7 @@ const Header = () => {
 	const path = useLocation().pathname
 	const dispatch = useDispatch()
 	const { currentUser } = useSelector((state) => state.user)
-	const { theme } = useSelector((state) => state.theme)
+	// const { theme } = useSelector((state) => state.theme)
 	return (
 		<Navbar
 			theme={navbarThemeConfig}
@@ -47,6 +54,14 @@ const Header = () => {
 				<AiOutlineSearch />
 			</Button>
 			<div className='flex gap-2 md:order-2'>
+				<div
+					className=''
+					onClick={() => dispatch(toggleTheme())}
+				>
+					<DarkThemeToggle />
+				</div>
+				{/* 
+				//NOTE: old theme function
 				<Button
 					theme={buttonThemeConfig}
 					className='w-12 h-10 hidden sm:inline'
@@ -54,7 +69,7 @@ const Header = () => {
 					onClick={() => dispatch(toggleTheme())}
 				>
 					{theme === 'light' ? <FaMoon /> : <FaSun />}
-				</Button>
+				</Button> */}
 				{currentUser ? (
 					<Dropdown
 						className='bg-bg0_h_lm dark:bg-bg1_dm'
@@ -85,7 +100,7 @@ const Header = () => {
 				) : (
 					<>
 						<Link to='/signup'>
-							<Button>Cadastrar-se</Button>
+							<Button theme={buttonThemeConfig}>Cadastrar-se</Button>
 						</Link>
 					</>
 				)}
