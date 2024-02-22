@@ -1,5 +1,5 @@
 import { Alert, Button, TextInput } from 'flowbite-react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { buttonThemeConfig, textInputThemeConfig } from '../configs/theme'
 import { useEffect, useRef, useState } from 'react'
 import {
@@ -11,14 +11,19 @@ import {
 import { app } from '../firebase'
 import { CircularProgressbar } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
+import { updateStart, updateSuccess, updateFailure } from '../slices/userSlice'
 
 const DashProfile = () => {
+	const dispatch = useDispatch()
 	const { currentUser } = useSelector((state) => state.user)
 	const [imageFile, setImageFile] = useState(null)
 	const [imageFileUrl, setImageFileUrl] = useState(null)
 	const [imageFileUploadProgress, setImageFileUploadProgress] = useState(0)
 	const [imageFileUploadError, setImageFileUploadError] = useState(null)
-	console.log(imageFileUploadProgress, imageFileUploadError)
+	const [imageFileUploading, setImageFileUploading] = useState(false)
+	const [updateUserSuccess, setUpdateUserSuccess] = useState(null)
+	const [updateUserError, setUpdateUserError] = useState(null)
+	const [formData, setFormData] = useState({})
 	const filePickerRef = useRef()
 	const handleImageUpload = (e) => {
 		const file = e.target.files[0]
@@ -28,6 +33,7 @@ const DashProfile = () => {
 		}
 	}
 	const uploadImage = async () => {
+		setImageFileUploading(true)
 		setImageFileUploadError(null)
 		const storage = getStorage(app)
 		const fileName = new Date().getTime() + imageFile.name
@@ -46,13 +52,53 @@ const DashProfile = () => {
 				setImageFileUploadProgress(0)
 				setImageFile(null)
 				setImageFileUrl(null)
+				setImageFileUploading(false)
 			},
 			() => {
 				getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
 					setImageFileUrl(downloadURL)
+					setFormData({ ...formData, profilePicture: downloadURL })
+					setImageFileUploading(false)
 				})
 			}
 		)
+	}
+	const handleFormChange = (e) => {
+		setFormData({ ...formData, [e.target.id]: e.target.value })
+	}
+	const handleFormSubmit = async (e) => {
+		e.preventDefault()
+		setUpdateUserError(null)
+		setUpdateUserSuccess(null)
+		if (Object.keys(formData).length === 0) {
+			setUpdateUserError('Nenhuma mudança foi feita')
+			return
+		}
+		if (imageFileUploading) {
+			setUpdateUserError('Espere o upload da imagem')
+			return
+		}
+		try {
+			dispatch(updateStart())
+			const res = await fetch(`/api/user/update/${currentUser._id}`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(formData),
+			})
+			const data = await res.json()
+			if (!res.ok) {
+				dispatch(updateFailure(data.message))
+				setUpdateUserError(data.message)
+			} else {
+				dispatch(updateSuccess(data))
+				setUpdateUserSuccess('As informações foram atualizadas com sucesso')
+			}
+		} catch (error) {
+			dispatch(updateFailure(error.message))
+			setUpdateUserError(error.message)
+		}
 	}
 	useEffect(() => {
 		if (imageFile) {
@@ -63,7 +109,10 @@ const DashProfile = () => {
 	return (
 		<div className='max-w-lg mx-auto p-3 w-full'>
 			<h1 className='my-7 text-center font-bold text-3xl'>Profile</h1>
-			<form className='flex flex-col gap-3'>
+			<form
+				onSubmit={handleFormSubmit}
+				className='flex flex-col gap-3'
+			>
 				<input
 					type='file'
 					accept='image/*'
@@ -116,6 +165,7 @@ const DashProfile = () => {
 					id='username'
 					placeholder={currentUser.username}
 					defaultValue={currentUser.username}
+					onChange={handleFormChange}
 				/>
 				<TextInput
 					theme={textInputThemeConfig}
@@ -123,14 +173,21 @@ const DashProfile = () => {
 					id='email'
 					placeholder={currentUser.email}
 					defaultValue={currentUser.email}
+					onChange={handleFormChange}
 				/>
 				<TextInput
 					theme={textInputThemeConfig}
 					type='password'
 					id='password'
 					placeholder='password'
+					onChange={handleFormChange}
 				/>
-				<Button theme={buttonThemeConfig}>Update</Button>
+				<Button
+					type='submit'
+					theme={buttonThemeConfig}
+				>
+					Update
+				</Button>
 			</form>
 			<div className='text-red1_lm dark:text-red1_dm flex justify-between mt-5'>
 				<span className='cursor-pointer border rounded p-2 border-red0'>
@@ -140,6 +197,22 @@ const DashProfile = () => {
 					Deslogar
 				</span>
 			</div>
+			{updateUserSuccess && (
+				<Alert
+					color='success'
+					className='mt-5'
+				>
+					{updateUserSuccess}
+				</Alert>
+			)}
+			{updateUserError && (
+				<Alert
+					color='failure'
+					className='mt-5'
+				>
+					{updateUserError}
+				</Alert>
+			)}
 		</div>
 	)
 }
