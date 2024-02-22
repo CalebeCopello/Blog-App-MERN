@@ -58,7 +58,7 @@ const signin = async (req, res, next) => {
 			{ expiresIn: '30d' }
 		)
 		const { password: psw, ...rest } = validUser._doc
-		res.status(200).cookie('acress_token', token, { httpOnly: true }).json(rest)
+		res.status(200).cookie('access_token', token, { httpOnly: true }).json(rest)
 	} catch (error) {
 		next(error)
 	}
