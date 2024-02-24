@@ -66,4 +66,12 @@ const deleteUser = async (req, res, next) => {
 	}
 }
 
-export { test, updateUser, deleteUser }
+const signOutUser = (req, res, next) => {
+	try {
+		res.clearCookie('access_token').status(200).json('O usuário foi deslogado')
+	} catch (error) {
+		next(error)
+	}
+}
+
+export { test, updateUser, deleteUser, signOutUser }

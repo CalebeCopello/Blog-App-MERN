@@ -22,6 +22,7 @@ import {
 	deleteUserStart,
 	deleteUserSuccess,
 	deleteUserFailure,
+	signOutSuccess,
 } from '../slices/userSlice'
 import { HiOutlineExclamationCircle } from 'react-icons/hi'
 
@@ -117,8 +118,8 @@ const DashProfile = () => {
 		setShowModal(false)
 		try {
 			dispatch(deleteUserStart())
-			const res = await fetch(`/api/user/delete/${currentUser._id}`,{
-				method: 'DELETE'
+			const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+				method: 'DELETE',
 			})
 			const data = await res.json()
 			if (!res.ok) {
@@ -128,6 +129,21 @@ const DashProfile = () => {
 			}
 		} catch (error) {
 			dispatch(deleteUserFailure(error.message))
+		}
+	}
+	const handleSignOut = async () => {
+		try {
+			const res = await fetch('/api/user/signout', {
+				method: 'POST',
+			})
+			const data = await res.json()
+			if (!res.ok) {
+				console.log(data.message)
+			} else {
+				dispatch(signOutSuccess())
+			}
+		} catch (error) {
+			console.log(error.message)
 		}
 	}
 	useEffect(() => {
@@ -226,7 +242,10 @@ const DashProfile = () => {
 				>
 					Deletar Conta
 				</span>
-				<span className='cursor-pointer border rounded p-2 border-red0'>
+				<span
+					onClick={handleSignOut}
+					className='cursor-pointer border rounded p-2 border-red0 bg-bg0_h_lm dark:bg-bg0_h_dm hover:bg-red0 hover:border-red1_lm hover:text-bg0_h_lm dark:hover:bg-red0 dark:hover:text-bg0_h_dm dark:hover:border-red1_dm'
+				>
 					Deslogar
 				</span>
 			</div>

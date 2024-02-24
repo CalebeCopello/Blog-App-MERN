@@ -16,12 +16,28 @@ import {
 	textInputThemeConfig,
 	navbarThemeConfig,
 } from '../configs/theme.js'
+import { signOutSuccess } from '../slices/userSlice.js'
 
 const Header = () => {
 	const path = useLocation().pathname
 	const dispatch = useDispatch()
 	const { currentUser } = useSelector((state) => state.user)
 	// const { theme } = useSelector((state) => state.theme)
+	const handleSignOut = async () => {
+		try {
+			const res = await fetch('/api/user/signout', {
+				method: 'POST',
+			})
+			const data = await res.json()
+			if (!res.ok) {
+				console.log(data.message)
+			} else {
+				dispatch(signOutSuccess())
+			}
+		} catch (error) {
+			console.log(error.message)
+		}
+	}
 	return (
 		<Navbar
 			theme={navbarThemeConfig}
@@ -94,7 +110,7 @@ const Header = () => {
 								<Dropdown.Item>Profile</Dropdown.Item>
 							</Link>
 							<Dropdown.Divider />
-							<Dropdown.Item>Deslogar</Dropdown.Item>
+							<Dropdown.Item onClick={handleSignOut}>Deslogar</Dropdown.Item>
 						</Dropdown.Header>
 					</Dropdown>
 				) : (

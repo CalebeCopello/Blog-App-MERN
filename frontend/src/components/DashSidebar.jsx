@@ -3,12 +3,29 @@ import { Link, useLocation } from 'react-router-dom'
 import { Sidebar } from 'flowbite-react'
 import { sidebarThemeConfig } from '../configs/theme'
 import { HiArrowSmLeft, HiUser } from 'react-icons/hi'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { signOutSuccess } from '../slices/userSlice'
 
 const DashSidebar = () => {
 	const { currentUser } = useSelector((state) => state.user)
 	const location = useLocation()
+	const dispatch = useDispatch()
 	const [tab, setTab] = useState('')
+	const handleSignOut = async () => {
+		try {
+			const res = await fetch('/api/user/signout', {
+				method: 'POST',
+			})
+			const data = await res.json()
+			if (!res.ok) {
+				console.log(data.message)
+			} else {
+				dispatch(signOutSuccess())
+			}
+		} catch (error) {
+			console.log(error.message)
+		}
+	}
 	useEffect(() => {
 		const urlParams = new URLSearchParams(location.search)
 		const tabFromUrl = urlParams.get('tab')
@@ -39,6 +56,7 @@ const DashSidebar = () => {
 					<Sidebar.Item
 						icon={HiArrowSmLeft}
 						className='cursor-pointer'
+						onClick={handleSignOut}
 					>
 						Deslogar
 					</Sidebar.Item>
