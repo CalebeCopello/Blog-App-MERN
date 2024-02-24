@@ -25,10 +25,11 @@ import {
 	signOutSuccess,
 } from '../slices/userSlice'
 import { HiOutlineExclamationCircle } from 'react-icons/hi'
+import { Link } from 'react-router-dom'
 
 const DashProfile = () => {
 	const dispatch = useDispatch()
-	const { currentUser, error } = useSelector((state) => state.user)
+	const { currentUser, error, loading } = useSelector((state) => state.user)
 	const [imageFile, setImageFile] = useState(null)
 	const [imageFileUrl, setImageFileUrl] = useState(null)
 	const [imageFileUploadProgress, setImageFileUploadProgress] = useState(0)
@@ -231,9 +232,21 @@ const DashProfile = () => {
 				<Button
 					type='submit'
 					theme={buttonThemeConfig}
+					disabled={loading || imageFileUploading}
 				>
-					Update
+					{loading || imageFileUploading ? 'Carregando' : 'Update'}
 				</Button>
+				{currentUser.isAdmin && (
+					<Link to={'/create-post'}>
+						<Button
+							type='button'
+							theme={buttonThemeConfig}
+							className='w-full'
+						>
+							Criar um Post
+						</Button>
+					</Link>
+				)}
 			</form>
 			<div className='text-red1_lm dark:text-red1_dm flex justify-between mt-5'>
 				<span
