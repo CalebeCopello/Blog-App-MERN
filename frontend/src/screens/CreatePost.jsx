@@ -1,5 +1,10 @@
 import { Button, FileInput, Select, TextInput } from 'flowbite-react'
-import { buttonThemeConfig, textInputThemeConfig } from '../configs/theme.js'
+import {
+	buttonThemeConfig,
+	fileInputThemeConfig,
+	selectThemeConfig,
+	textInputThemeConfig,
+} from '../configs/theme.js'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 const CreatePost = () => {
@@ -16,8 +21,11 @@ const CreatePost = () => {
 						id='title'
 						className='flex-1'
 					/>
-					<Select className='flex-1'>
-						<option value='uncategorized'>Escolha uma categoria</option>
+					<Select
+						className='flex-1'
+						theme={selectThemeConfig}
+					>
+						<option value='uncategorized'>Sem categoria</option>
 						<option value='javascript'>JavaScript</option>
 						<option value='reactjs'>ReactJS</option>
 						<option value='nodejs'>NodeJS</option>
@@ -25,6 +33,7 @@ const CreatePost = () => {
 				</div>
 				<div className='flex gap-4 items-center justify-between border rounded-sm border-orange1_lm dark:border-orange1_dm border-dashed p-3 shadow'>
 					<FileInput
+						theme={fileInputThemeConfig}
 						type='file'
 						accept='image/*'
 					/>
@@ -35,12 +44,12 @@ const CreatePost = () => {
 						Enviar uma imagem
 					</Button>
 				</div>
-					<ReactQuill
-						theme='snow'
-						placeholder='Escreva algo...'
-						className='h-72 mb-12 ring-transparent'
-						required
-					/>
+				<ReactQuill
+					theme='snow'
+					placeholder='Escreva algo...'
+					className='h-72 mb-12 ring-transparent'
+					required
+				/>
 				<Button
 					type='submit'
 					theme={buttonThemeConfig}

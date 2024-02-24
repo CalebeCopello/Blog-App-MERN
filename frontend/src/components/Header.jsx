@@ -15,6 +15,7 @@ import {
 	buttonThemeConfig,
 	textInputThemeConfig,
 	navbarThemeConfig,
+	darkThemeToggleThemeConfig,
 } from '../configs/theme.js'
 import { signOutSuccess } from '../slices/userSlice.js'
 
@@ -74,7 +75,9 @@ const Header = () => {
 					className=''
 					onClick={() => dispatch(toggleTheme())}
 				>
-					<DarkThemeToggle />
+					<DarkThemeToggle
+						theme={darkThemeToggleThemeConfig}
+					/>
 				</div>
 				{/* 
 				//NOTE: old theme function

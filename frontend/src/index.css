@@ -69,7 +69,15 @@
 	--aqua1_dm: #8ec07c;
 	--orange1_dm: #fe8019;
 }
-
+input[type="file"]::file-selector-button {
+	color: var(--fg0_lm);
+	background: var(--orange0);
+}
+.dark input[type="file"]::file-selector-button {
+	color: var(--fg0_dm);
+	background: var(--orange0);
+}
+/* react-quill config */
 .ql-snow {
 	background-color: var(--bg0_lm);
 	color: var(--fg0_lm);
@@ -219,11 +227,10 @@
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-miter {
 	stroke: var(--orange0) !important;
 }
-/* .ql-stroke {
-	stroke: red !important;
-} */
-/* 
-.dark .ql-toolbar {
-	background-color: var(--bg2_dm);
+.ql-editor.ql-blank::before {
+	color: var(--fg0_lm);
 }
-*/
+.dark .ql-editor.ql-blank::before {
+	color: var(--fg0_dm);
+}
+/* end of react-quill config */
