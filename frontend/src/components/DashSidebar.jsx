@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Sidebar } from 'flowbite-react'
 import { sidebarThemeConfig } from '../configs/theme'
-import { HiArrowSmLeft, HiUser } from 'react-icons/hi'
+import { HiArrowSmLeft, HiDocumentText, HiUser } from 'react-icons/hi'
 import { useSelector, useDispatch } from 'react-redux'
 import { signOutSuccess } from '../slices/userSlice'
 
@@ -44,13 +44,26 @@ const DashSidebar = () => {
 						<Sidebar.Item
 							active={tab === 'profile'}
 							icon={HiUser}
-							label={currentUser.username}
+							label={currentUser.isAdmin ? 'Admin' : 'Usuário'}
 							labelColor='dark'
 							as='div'
 						>
 							Profile
 						</Sidebar.Item>
 					</Link>
+					{currentUser.isAdmin && (
+						<Sidebar.ItemGroup>
+							<Link to='/dashboard?tab=posts'>
+								<Sidebar.Item
+									active={tab === 'posts'}
+									icon={HiDocumentText}
+									as='div'
+								>
+									Posts
+								</Sidebar.Item>
+							</Link>
+						</Sidebar.ItemGroup>
+					)}
 				</Sidebar.ItemGroup>
 				<Sidebar.ItemGroup>
 					<Sidebar.Item
