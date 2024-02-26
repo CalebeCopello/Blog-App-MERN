@@ -326,7 +326,7 @@ const selectThemeConfig = {
 				lg: 'sm:text-md p-4',
 			},
 			colors: {
-				gray: 'bg-bg0_lm border-orange1_lm text-fg0_lm placeholder-gray0 focus:border-orange1_lm focus:ring-orange1_lm dark:border-orange1_dm dark:bg-bg0_dm dark:text-fg0_dm dark:placeholder-gray0 dark:focus:border-orange1_dm dark:focus:ring-orange1_dm',
+				gray: 'bg-bg0_h_lm border-orange1_lm text-fg0_lm placeholder-gray0 focus:border-orange1_lm focus:ring-orange1_lm dark:border-orange1_dm dark:bg-bg0_h_dm dark:text-fg0_dm dark:placeholder-gray0 dark:focus:border-orange1_dm dark:focus:ring-orange1_dm',
 				info: 'border-cyan-500 bg-cyan-50 text-cyan-900 placeholder-cyan-700 focus:border-cyan-500 focus:ring-cyan-500 dark:border-cyan-400 dark:bg-cyan-100 dark:focus:border-cyan-500 dark:focus:ring-cyan-500',
 				failure:
 					'border-red-500 bg-red-50 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100 dark:focus:border-red-500 dark:focus:ring-red-500',
@@ -353,7 +353,7 @@ const fileInputThemeConfig = {
 				lg: 'sm:text-md',
 			},
 			colors: {
-				gray: 'bg-bg0_lm border-orange1_lm text-fg0_lm placeholder-gray0 focus:border-orange0 focus:ring-orange0 dark:border-orange0 dark:bg-bg0_dm dark:text-fg0_dm dark:placeholder-gray0 dark:focus:border-orange0 dark:focus:ring-orange0',
+				gray: 'bg-bg0_h_lm border-orange1_lm text-fg0_lm placeholder-gray0 focus:border-orange0 focus:ring-orange0 dark:border-orange0 dark:bg-bg0_h_dm dark:text-fg0_dm dark:placeholder-gray0 dark:focus:border-orange0 dark:focus:ring-orange0',
 				info: 'border-cyan-500 bg-cyan-50 text-cyan-900 placeholder-cyan-700 focus:border-cyan-500 focus:ring-cyan-500 dark:border-cyan-400 dark:bg-cyan-100 dark:focus:border-cyan-500 dark:focus:ring-cyan-500',
 				failure:
 					'border-red-500 bg-red-50 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100 dark:focus:border-red-500 dark:focus:ring-red-500',

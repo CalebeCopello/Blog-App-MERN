@@ -79,17 +79,17 @@ input[type="file"]::file-selector-button {
 }
 /* react-quill config */
 .ql-snow {
-	background-color: var(--bg0_lm);
+	background-color: var(--bg0_h_lm);
 	color: var(--fg0_lm);
 	border-color: var(--orange0) !important;
 }
 .dark .ql-snow {
-	background-color: var(--bg0_dm);
+	background-color: var(--bg0_h_dm);
 	color: var(--fg0_dm);
 }
 .ql-snow,
 .dark .ql-snow {
-	font-size: 1.1rem;
+	font-size: 1rem;
 }
 
 .ql-editor:focus-visible {
