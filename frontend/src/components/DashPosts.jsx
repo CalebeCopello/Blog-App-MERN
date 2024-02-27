@@ -1,13 +1,28 @@
-import { Table } from 'flowbite-react'
+import { Button, Table } from 'flowbite-react'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { spanButtonThemeConfig } from '../configs/theme'
+import { buttonThemeConfig, spanButtonThemeConfig } from '../configs/theme'
 
 const DashPosts = () => {
 	const { currentUser } = useSelector((state) => state.user)
 	const [userPosts, setUserPosts] = useState([])
-	console.log(userPosts)
+	const [showMore, setShowMore] = useState(true)
+	const handleShowMore = async () => {
+		const startIndex = userPosts.length
+		try {
+			const res = await fetch(`/api/post/getposts?userId=${currentUser._id}&startIndex=${startIndex}`)
+			const data = await res.json()
+			if (res.ok) {
+				setUserPosts((prev) => [...prev, ...data.posts])
+				if (data.posts.length < 9) {
+					setShowMore(false)
+				}
+			}
+		} catch (error) {
+			console.log(error.message)
+		}
+	}
 	useEffect(() => {
 		const fetchPosts = async () => {
 			try {
@@ -15,6 +30,9 @@ const DashPosts = () => {
 				const data = await res.json()
 				if (res.ok) {
 					setUserPosts(data.posts)
+					if(data.posts.length < 9) {
+						setShowMore(false)
+					}
 				}
 			} catch (error) {
 				console.log(error.message)
@@ -73,6 +91,9 @@ const DashPosts = () => {
 							</Table.Body>
 						))}
 					</Table>
+					{showMore && (
+						<Button theme={buttonThemeConfig} className='w-full self-center py-1' onClick={handleShowMore}>Mostrar mais</Button>
+					)}
 				</>
 			) : (
 				<p className='mx-auto'>Você não possuiu nenhuma postagem</p>
