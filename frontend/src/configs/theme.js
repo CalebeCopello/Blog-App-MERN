@@ -366,7 +366,7 @@ const fileInputThemeConfig = {
 	},
 }
 
-const spanButtonThemeConfig = 'cursor-pointer border rounded p-2 border-red0 bg-bg0_h_lm dark:bg-bg0_h_dm hover:bg-red0 hover:border-red1_lm hover:text-bg0_h_lm dark:hover:bg-red0 dark:hover:text-bg0_h_dm dark:hover:border-red1_dm'
+const spanButtonThemeConfig = ' shadow cursor-pointer border rounded p-2 border-red0 bg-bg0_h_lm text-fg0_lm dark:text-fg0_dm dark:bg-bg0_h_dm hover:bg-red0 hover:border-red1_lm hover:text-bg0_h_lm dark:hover:bg-red0 dark:hover:text-bg0_h_dm dark:hover:border-red1_dm'
 
 export {
 	darkThemeToggleThemeConfig,
