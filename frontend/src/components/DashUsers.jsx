@@ -32,7 +32,19 @@ const DashUsers = () => {
 	}
 	const handleDeleteUser = async () => {
 		setShowModal(false)
-		console.log('tbd')
+		try {
+            const res = await fetch(`/api/user/deleteuser/${userIdToDelete}`,{
+                method: 'DELETE'
+            })
+            const data = await res.json()
+            if(res.ok) {
+                setUsers((prev) => prev.filter((user) => user._id !== userIdToDelete))
+            } else {
+                console.log(data.message)
+            }
+        } catch (error) {
+            console.log(error.message)
+        }
 	}
 	useEffect(() => {
 		const fetchUsers = async () => {
@@ -69,9 +81,9 @@ const DashUsers = () => {
 							<Table.HeadCell>Admin</Table.HeadCell>
 							<Table.HeadCell>Deletar</Table.HeadCell>
 						</Table.Head>
-						{users.map((user, index) => (
+						{users.map((user) => (
 							<Table.Body
-								key={index}
+								key={user._id}
 								className='divide-y'
 							>
 								<Table.Row>
@@ -135,7 +147,7 @@ const DashUsers = () => {
 					<div className='text-center'>
 						<HiOutlineExclamationCircle className='h-14 w-14 text-red1_lm dark:text-red1_dm mb-4 mx-auto' />
 						<h3 className='mb-5 text-lg text-fg0_lm dark:text-fg0_dm'>
-							Você realmente quer deletar esse post?
+							Você realmente quer deletar esse usuário?
 						</h3>
 						<div className='flex justify-center gap-3'>
 							<Button

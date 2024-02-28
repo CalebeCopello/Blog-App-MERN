@@ -88,9 +88,9 @@ const DashPosts = () => {
 							<Table.HeadCell>Deletar</Table.HeadCell>
 							<Table.HeadCell>Editar</Table.HeadCell>
 						</Table.Head>
-						{userPosts.map((post, index) => (
+						{userPosts.map((post) => (
 							<Table.Body
-								key={index}
+								key={post._id}
 								className='divide-y'
 							>
 								<Table.Row>
