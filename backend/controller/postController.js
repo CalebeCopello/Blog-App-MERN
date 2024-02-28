@@ -73,7 +73,9 @@ const getPosts = async (req, res, next) => {
 
 const deletePost = async (req, res, next) => {
 	if (!req.user.isAdmin || req.user.id !== req.params.userId) {
-		return next(errorHandler(403, 'Você não tem permissão para deletar essa postagem'))
+		return next(
+			errorHandler(403, 'Você não tem permissão para deletar essa postagem')
+		)
 	}
 	try {
 		await Post.findByIdAndDelete(req.params.postId)
@@ -83,4 +85,29 @@ const deletePost = async (req, res, next) => {
 	}
 }
 
-export { create, getPosts, deletePost }
+const updatePost = async (req, res, next) => {
+	if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+		return next(
+			errorHandler(403, 'Você não tem permissão para atualizar essa postagem')
+		)
+	}
+	try {
+		const updatedPost = await Post.findByIdAndUpdate(
+			req.params.postId,
+			{
+				$set: {
+					title: req.body.title,
+					content: req.body.content,
+					category: req.body.category,
+					image: req.body.image,
+				},
+			},
+			{ new: true }
+		)
+		res.status(200).json(updatedPost)
+	} catch (error) {
+		next(error)
+	}
+}
+
+export { create, getPosts, deletePost, updatePost }

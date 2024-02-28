@@ -7,7 +7,7 @@ import {
 } from '../configs/theme.js'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
 	getDownloadURL,
 	getStorage,
@@ -17,15 +17,19 @@ import {
 import { app } from '../firebase.js'
 import { CircularProgressbar } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-const CreatePost = () => {
+function UpdatePost() {
 	const navigate = useNavigate()
+	const { postId } = useParams()
 	const [file, setFile] = useState(null)
 	const [imageUploadProgress, setImageUploadProgress] = useState(null)
 	const [imageUploadError, setImageUploadError] = useState(null)
 	const [formData, setFormData] = useState({})
 	const [publishError, setPublishError] = useState(null)
+	const { currentUser } = useSelector((state) => state.user)
+    console.log(formData)
 	const handleUploadImage = async () => {
 		try {
 			if (!file) {
@@ -65,13 +69,16 @@ const CreatePost = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 		try {
-			const res = await fetch('/api/post/create', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(formData),
-			})
+			const res = await fetch(
+				`/api/post/updatepost/${formData._id}/${currentUser._id}`,
+				{
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(formData),
+				}
+			)
 			const data = await res.json()
 			if (!res.ok) {
 				setPublishError(data.message)
@@ -85,9 +92,32 @@ const CreatePost = () => {
 			setImageUploadError('Houve um problema na publicação')
 		}
 	}
+	useEffect(() => {
+		try {
+			const fetchPost = async () => {
+				const res = await fetch(`/api/post/getposts?postId=${postId}`)
+				const data = await res.json()
+				if (!res.ok) {
+					console.log(data.message)
+					setPublishError(data.message)
+					return
+				}
+				if (res.ok) {
+					setPublishError(null)
+					setFormData(data.posts[0])
+				}
+			}
+			fetchPost()
+		} catch (error) {
+			console.log(error.message)
+		}
+	}, [postId])
+
 	return (
 		<div className='p-3 max-w-3xl mx-auto min-h-screen'>
-			<h1 className='text-center text-3xl my-7 font-semibold'>Criar Postagem</h1>
+			<h1 className='text-center text-3xl my-7 font-semibold'>
+				Atualizar Postagem
+			</h1>
 			<form
 				className='flex flex-col gap-4'
 				onSubmit={handleSubmit}
@@ -103,6 +133,7 @@ const CreatePost = () => {
 						onChange={(e) =>
 							setFormData({ ...formData, title: e.target.value })
 						}
+						value={formData.title}
 					/>
 					<Select
 						className='flex-1'
@@ -110,6 +141,7 @@ const CreatePost = () => {
 						onChange={(e) =>
 							setFormData({ ...formData, category: e.target.value })
 						}
+						value={formData.category}
 					>
 						<option value='uncategorized'>Sem categoria</option>
 						<option value='javascript'>JavaScript</option>
@@ -172,17 +204,25 @@ const CreatePost = () => {
 					className='h-72 mb-12 ring-transparent'
 					required
 					onChange={(value) => setFormData({ ...formData, content: value })}
+					value={formData.content}
 				/>
 				<Button
 					type='submit'
 					theme={buttonThemeConfig}
 				>
-					Publicar
+					Atualizar
 				</Button>
-				{publishError && <Alert className='mt-5' color='failure'>{publishError}</Alert>}
+				{publishError && (
+					<Alert
+						className='mt-5'
+						color='failure'
+					>
+						{publishError}
+					</Alert>
+				)}
 			</form>
 		</div>
 	)
 }
 
-export default CreatePost
+export default UpdatePost

@@ -122,8 +122,9 @@ const DashPosts = () => {
 										</span>
 									</Table.Cell>
 									<Table.Cell>
-										<Link to={`/update-post/${post._id}`}></Link>
-										<span className={spanButtonThemeConfig}>Editar</span>
+										<Link to={`/update-post/${post._id}`}>
+											<span className={spanButtonThemeConfig}>Editar</span>
+										</Link>
 									</Table.Cell>
 								</Table.Row>
 							</Table.Body>

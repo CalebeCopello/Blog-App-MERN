@@ -10,6 +10,7 @@ import FooterComponent from './components/Footer'
 import PrivateRoute from './components/PrivateRoute'
 import OnlyAdminPrivateRoute from './components/OnlyAdminPrivateRoute'
 import CreatePost from './screens/CreatePost'
+import UpdatePost from './screens/UpdatePost'
 
 const App = () => {
 	return (
@@ -43,6 +44,10 @@ const App = () => {
 						<Route
 							path='/create-post'
 							element={<CreatePost />}
+						/>
+						<Route
+							path='/update-post/:postId'
+							element={<UpdatePost />}
 						/>
 					</Route>
 					<Route
