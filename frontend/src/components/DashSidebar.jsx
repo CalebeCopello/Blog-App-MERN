@@ -2,7 +2,12 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Sidebar } from 'flowbite-react'
 import { sidebarThemeConfig } from '../configs/theme'
-import { HiArrowSmLeft, HiDocumentText, HiUser } from 'react-icons/hi'
+import {
+	HiArrowSmLeft,
+	HiDocumentText,
+	HiOutlineUserGroup,
+	HiUser,
+} from 'react-icons/hi'
 import { useSelector, useDispatch } from 'react-redux'
 import { signOutSuccess } from '../slices/userSlice'
 
@@ -39,7 +44,7 @@ const DashSidebar = () => {
 			className='w-full md:w-56'
 		>
 			<Sidebar.Items>
-				<Sidebar.ItemGroup>
+				<Sidebar.ItemGroup className='flex flex-col gap-1'>
 					<Link to='/dashboard?tab=profile'>
 						<Sidebar.Item
 							active={tab === 'profile'}
@@ -52,17 +57,26 @@ const DashSidebar = () => {
 						</Sidebar.Item>
 					</Link>
 					{currentUser.isAdmin && (
-						<Sidebar.ItemGroup>
-							<Link to='/dashboard?tab=posts'>
-								<Sidebar.Item
-									active={tab === 'posts'}
-									icon={HiDocumentText}
-									as='div'
-								>
-									Posts
-								</Sidebar.Item>
-							</Link>
-						</Sidebar.ItemGroup>
+						<Link to='/dashboard?tab=posts'>
+							<Sidebar.Item
+								active={tab === 'posts'}
+								icon={HiDocumentText}
+								as='div'
+							>
+								Posts
+							</Sidebar.Item>
+						</Link>
+					)}
+					{currentUser.isAdmin && (
+						<Link to='/dashboard?tab=users'>
+							<Sidebar.Item
+								active={tab === 'users'}
+								icon={HiOutlineUserGroup}
+								as='div'
+							>
+								Users
+							</Sidebar.Item>
+						</Link>
 					)}
 				</Sidebar.ItemGroup>
 				<Sidebar.ItemGroup>
