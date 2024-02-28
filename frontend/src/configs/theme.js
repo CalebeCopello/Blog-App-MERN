@@ -139,11 +139,38 @@ const buttonThemeConfig = {
 const navbarThemeConfig = {
 	root: {
 		base: 'bg-bg2_lm px-2 py-2.5 border-orange1_lm dark:border-orange1_dm dark:bg-bg2_dm sm:px-4',
+		rounded: {
+			on: 'rounded',
+			off: '',
+		},
+		bordered: {
+			on: 'border',
+			off: '',
+		},
+		inner: {
+			base: 'mx-auto flex flex-wrap items-center justify-between',
+			fluid: {
+				on: '',
+				off: 'container',
+			},
+		},
+	},
+	brand: {
+		base: 'flex items-center',
+	},
+	collapse: {
+		base: 'w-full md:block md:w-auto',
+		list: 'mt-4 flex flex-col md:mt-0 md:flex-row md:space-x-8 md:text-sm md:font-medium',
+		hidden: {
+			on: 'hidden',
+			off: '',
+		},
 	},
 	link: {
+		base: 'block py-2 pr-4 pl-3 md:p-0',
 		active: {
 			on: 'bg-orange0 text-fg0_lm dark:text-bg0_h_lm md:bg-transparent md:text-orange0 md:dark:text-orange1_dm',
-			off: 'border-b border-gray-100  text-fg0_lm hover:bg-orange1_lm dark:border-gray-700 dark:text-bg0_lm dark:hover:bg-orange1_dm dark:hover:text-bg0_h_lm md:border-0 md:hover:bg-transparent md:hover:text-orange1_lm md:dark:hover:bg-transparent md:dark:hover:text-orange1_dm',
+			off: 'border-b border-orange1_lm  text-fg0_lm hover:bg-orange1_lm dark:border-orange1_dm dark:text-bg0_lm dark:hover:bg-orange1_dm dark:hover:text-bg0_h_lm md:border-0 md:hover:bg-transparent md:hover:text-orange1_lm md:dark:hover:bg-transparent md:dark:hover:text-orange1_dm',
 		},
 		disabled: {
 			on: 'text-gray-400 hover:cursor-not-allowed dark:text-gray-600',
@@ -151,11 +178,43 @@ const navbarThemeConfig = {
 		},
 	},
 	toggle: {
-		base: 'inline-flex items-center rounded-lg p-2 text-sm text-fg0_lm hover:bg-orange1_lm focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-fg0_dm dark:hover:bg-orange1_dm dark:focus:ring-gray-600 md:hidden',
+		base: 'inline-flex items-center rounded-lg p-2 text-sm text-fg0_lm hover:bg-orange1_lm focus:outline-none focus:ring-2 focus:ring-orange1_lm dark:text-fg0_dm dark:hover:bg-orange1_dm dark:focus:ring-orange1_dm md:hidden',
 		icon: 'h-6 w-6 shrink-0',
 	},
 }
-
+const dropdownThemeConfig = {
+	arrowIcon: 'ml-2 h-4 w-4',
+	content: 'py-1 focus:outline-none bg-bg0_h_lm dark:bg-bg0_h_dm',
+	floating: {
+		animation: 'transition-opacity',
+		arrow: {
+			base: 'absolute z-10 h-2 w-2 rotate-45',
+			style: {
+				dark: 'bg-gray-900 dark:bg-gray-700',
+				light: 'bg-white',
+				auto: 'bg-white dark:bg-gray-700',
+			},
+			placement: '-4px',
+		},
+		base: 'z-10 w-fit rounded divide-y divide-gray-100 shadow focus:outline-none',
+		content: 'py-1 text-sm text-fg0_lm dark:text-fg0_dm',
+		divider: 'my-1 h-px bg-orange1_lm dark:bg-orange1_dm',
+		header: 'block py-2 px-4 text-sm text-fg0_lm dark:text-fg0_dm',
+		hidden: 'invisible opacity-0',
+		item: {
+			container: '',
+			base: 'flex items-center justify-start py-2 px-4 text-sm text-fg0_lm cursor-pointer w-full hover:bg-orange1_dm focus:bg-orange1_dm dark:text-fg0_dm dark:hover:bg-orange1_lm focus:outline-none dark:focus:bg-orange1_lm',
+			icon: 'mr-2 h-4 w-4',
+		},
+		style: {
+			dark: 'bg-gray-900 text-white dark:bg-gray-700',
+			light: 'border border-gray-200 bg-white text-gray-900',
+			auto: 'border border-gray-200 bg-white text-gray-900 dark:border-none dark:bg-gray-700 dark:text-white',
+		},
+		target: 'w-fit',
+	},
+	inlineWrapper: 'flex items-center',
+}
 const footerThemeConfig = {
 	root: {
 		base: 'w-full rounded-lg bg-bg2_lm shadow border-orange1_lm dark:border-orange1_dm  dark:bg-bg2_dm md:flex md:items-center md:justify-between',
@@ -366,17 +425,47 @@ const fileInputThemeConfig = {
 	},
 }
 
-const spanButtonThemeConfig = ' shadow cursor-pointer border rounded p-2 border-red0 bg-bg0_h_lm text-fg0_lm dark:text-fg0_dm dark:bg-bg0_h_dm hover:bg-red0 hover:border-red1_lm hover:text-bg0_h_lm dark:hover:bg-red0 dark:hover:text-bg0_h_dm dark:hover:border-red1_dm'
+const tableThemeConfig = {
+	root: {
+		base: 'w-full text-left text-sm text-fg0_lm dark:text-fg0_dm',
+		shadow:
+			'absolute bg-white dark:bg-black w-full h-full top-0 left-0 rounded-lg drop-shadow-md -z-10',
+		wrapper: 'relative',
+	},
+	body: {
+		base: 'group/body',
+		cell: {
+			base: 'group-first/body:group-first/row:first:rounded-tl-lg group-first/body:group-first/row:last:rounded-tr-lg group-last/body:group-last/row:first:rounded-bl-lg group-last/body:group-last/row:last:rounded-br-lg px-6 py-4',
+		},
+	},
+	head: {
+		base: 'group/head text-xs uppercase text-fg0_lm dark:text-fg0_dm',
+		cell: {
+			base: 'group-first/head:first:rounded-tl-lg group-first/head:last:rounded-tr-lg bg-bg4_lm dark:bg-bg4_dm px-6 py-3',
+		},
+	},
+	row: {
+		base: 'group/row',
+		hovered: 'hover:bg-bg0_lm dark:hover:bg-bg0_dm',
+		striped:
+			'odd:bg-bg2_lm even:bg-bg3_lm odd:dark:bg-bg2_dm even:dark:bg-bg3_dm',
+	},
+}
+
+const spanButtonThemeConfig =
+	' shadow cursor-pointer border rounded p-2 border-red0 bg-bg0_h_lm text-fg0_lm dark:text-fg0_dm dark:bg-bg0_h_dm hover:bg-red0 hover:border-red1_lm hover:text-bg0_h_lm dark:hover:bg-red0 dark:hover:text-bg0_h_dm dark:hover:border-red1_dm'
 
 export {
 	darkThemeToggleThemeConfig,
 	textInputThemeConfig,
 	buttonThemeConfig,
 	navbarThemeConfig,
+	dropdownThemeConfig,
 	footerThemeConfig,
 	sidebarThemeConfig,
 	modalThemeConfig,
 	selectThemeConfig,
 	fileInputThemeConfig,
+	tableThemeConfig,
 	spanButtonThemeConfig,
 }

@@ -16,6 +16,7 @@ import {
 	textInputThemeConfig,
 	navbarThemeConfig,
 	darkThemeToggleThemeConfig,
+	dropdownThemeConfig,
 } from '../configs/theme.js'
 import { signOutSuccess } from '../slices/userSlice.js'
 
@@ -75,9 +76,7 @@ const Header = () => {
 					className=''
 					onClick={() => dispatch(toggleTheme())}
 				>
-					<DarkThemeToggle
-						theme={darkThemeToggleThemeConfig}
-					/>
+					<DarkThemeToggle theme={darkThemeToggleThemeConfig} />
 				</div>
 				{/* 
 				//NOTE: old theme function
@@ -91,7 +90,8 @@ const Header = () => {
 				</Button> */}
 				{currentUser ? (
 					<Dropdown
-						className='bg-bg0_h_lm dark:bg-bg1_dm'
+						theme={dropdownThemeConfig}
+						// className='bg-bg0_h_lm dark:bg-bg1_dm'
 						arrowIcon={false}
 						inline
 						label={

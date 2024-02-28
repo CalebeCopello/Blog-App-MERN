@@ -5,6 +5,7 @@ import {
 	buttonThemeConfig,
 	spanButtonThemeConfig,
 	modalThemeConfig,
+	tableThemeConfig,
 } from '../configs/theme'
 import { HiOutlineExclamationCircle } from 'react-icons/hi'
 import { FaCheck, FaTimes } from 'react-icons/fa'
@@ -33,18 +34,18 @@ const DashUsers = () => {
 	const handleDeleteUser = async () => {
 		setShowModal(false)
 		try {
-            const res = await fetch(`/api/user/deleteuser/${userIdToDelete}`,{
-                method: 'DELETE'
-            })
-            const data = await res.json()
-            if(res.ok) {
-                setUsers((prev) => prev.filter((user) => user._id !== userIdToDelete))
-            } else {
-                console.log(data.message)
-            }
-        } catch (error) {
-            console.log(error.message)
-        }
+			const res = await fetch(`/api/user/deleteuser/${userIdToDelete}`, {
+				method: 'DELETE',
+			})
+			const data = await res.json()
+			if (res.ok) {
+				setUsers((prev) => prev.filter((user) => user._id !== userIdToDelete))
+			} else {
+				console.log(data.message)
+			}
+		} catch (error) {
+			console.log(error.message)
+		}
 	}
 	useEffect(() => {
 		const fetchUsers = async () => {
@@ -72,6 +73,8 @@ const DashUsers = () => {
 					<Table
 						hoverable
 						className='shadow-md'
+						theme={tableThemeConfig}
+						striped
 					>
 						<Table.Head>
 							<Table.HeadCell>Data</Table.HeadCell>
@@ -81,12 +84,12 @@ const DashUsers = () => {
 							<Table.HeadCell>Admin</Table.HeadCell>
 							<Table.HeadCell>Deletar</Table.HeadCell>
 						</Table.Head>
-						{users.map((user) => (
-							<Table.Body
-								key={user._id}
-								className='divide-y'
-							>
-								<Table.Row>
+						<Table.Body className='divide-y'>
+							{users.map((user) => (
+								<Table.Row
+									key={user._id}
+									className='border-orange0'
+								>
 									<Table.Cell>
 										{new Date(user.createdAt).toLocaleString()}
 									</Table.Cell>
@@ -118,8 +121,8 @@ const DashUsers = () => {
 										</span>
 									</Table.Cell>
 								</Table.Row>
-							</Table.Body>
-						))}
+							))}
+						</Table.Body>
 					</Table>
 					{showMore && (
 						<Button

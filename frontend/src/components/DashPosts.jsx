@@ -6,6 +6,7 @@ import {
 	buttonThemeConfig,
 	spanButtonThemeConfig,
 	modalThemeConfig,
+	tableThemeConfig,
 } from '../configs/theme'
 import { HiOutlineExclamationCircle } from 'react-icons/hi'
 
@@ -79,6 +80,8 @@ const DashPosts = () => {
 					<Table
 						hoverable
 						className='shadow-md'
+						theme={tableThemeConfig}
+						striped
 					>
 						<Table.Head>
 							<Table.HeadCell>Data</Table.HeadCell>
@@ -88,12 +91,9 @@ const DashPosts = () => {
 							<Table.HeadCell>Deletar</Table.HeadCell>
 							<Table.HeadCell>Editar</Table.HeadCell>
 						</Table.Head>
-						{userPosts.map((post) => (
-							<Table.Body
-								key={post._id}
-								className='divide-y'
-							>
-								<Table.Row>
+						<Table.Body className='divide-y'>
+							{userPosts.map((post) => (
+								<Table.Row key={post._id} className='border-orange0'>
 									<Table.Cell>
 										{new Date(post.updatedAt).toLocaleString()}
 									</Table.Cell>
@@ -127,8 +127,8 @@ const DashPosts = () => {
 										</Link>
 									</Table.Cell>
 								</Table.Row>
-							</Table.Body>
-						))}
+							))}
+						</Table.Body>
 					</Table>
 					{showMore && (
 						<Button
