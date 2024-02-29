@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Alert, Button, Textarea } from 'flowbite-react'
-import { buttonThemeConfig } from '../configs/theme'
+import { buttonThemeConfig, textareaThemeConfig } from '../configs/theme'
 import { useState } from 'react'
 
 // eslint-disable-next-line react/prop-types
@@ -78,6 +78,7 @@ function CommentSection({ postId }) {
 						className='border p-3 rounded-md border-orange1_lm dark:border-orange1_dm'
 					>
 						<Textarea
+                        theme={textareaThemeConfig}
 							placeholder='Escreva seu comentário...'
 							rows={3}
 							maxLength={200}

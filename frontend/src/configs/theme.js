@@ -452,6 +452,25 @@ const tableThemeConfig = {
 	},
 }
 
+const textareaThemeConfig = {
+	base: 'block w-full rounded-lg border disabled:cursor-not-allowed disabled:opacity-50 text-sm',
+	colors: {
+		gray: 'bg-bg0_h_lm border-orange0 text-fg0_lm placeholder-gray0 focus:border-orange1_lm focus:ring-orange1_lm dark:bg-bg0_dm dark:text-bg0_h_lm dark:placeholder-gray0 dark:focus:border-orange1_dm dark:focus:ring-orange1_dm',
+		// gray: 'bg-gray-50 border-gray-300 text-gray-900 focus:border-cyan-500 focus:ring-cyan-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-cyan-500 dark:focus:ring-cyan-500',
+		info: 'border-cyan-500 bg-cyan-50 text-cyan-900 placeholder-cyan-700 focus:border-cyan-500 focus:ring-cyan-500 dark:border-cyan-400 dark:bg-cyan-100 dark:focus:border-cyan-500 dark:focus:ring-cyan-500',
+		failure:
+			'border-red-500 bg-red-50 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100 dark:focus:border-red-500 dark:focus:ring-red-500',
+		warning:
+			'border-yellow-500 bg-yellow-50 text-yellow-900 placeholder-yellow-700 focus:border-yellow-500 focus:ring-yellow-500 dark:border-yellow-400 dark:bg-yellow-100 dark:focus:border-yellow-500 dark:focus:ring-yellow-500',
+		success:
+			'border-green-500 bg-green-50 text-green-900 placeholder-green-700 focus:border-green-500 focus:ring-green-500 dark:border-green-400 dark:bg-green-100 dark:focus:border-green-500 dark:focus:ring-green-500',
+	},
+	withShadow: {
+		on: 'shadow-sm dark:shadow-sm-light',
+		off: '',
+	},
+}
+
 const spanButtonThemeConfig =
 	' shadow cursor-pointer border rounded p-2 border-red0 bg-bg0_h_lm text-fg0_lm dark:text-fg0_dm dark:bg-bg0_h_dm hover:bg-red0 hover:border-red1_lm hover:text-bg0_h_lm dark:hover:bg-red0 dark:hover:text-bg0_h_dm dark:hover:border-red1_dm'
 
@@ -467,5 +486,6 @@ export {
 	selectThemeConfig,
 	fileInputThemeConfig,
 	tableThemeConfig,
+	textareaThemeConfig,
 	spanButtonThemeConfig,
 }
