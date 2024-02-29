@@ -29,7 +29,6 @@ function UpdatePost() {
 	const [formData, setFormData] = useState({})
 	const [publishError, setPublishError] = useState(null)
 	const { currentUser } = useSelector((state) => state.user)
-    console.log(formData)
 	const handleUploadImage = async () => {
 		try {
 			if (!file) {
@@ -133,7 +132,7 @@ function UpdatePost() {
 						onChange={(e) =>
 							setFormData({ ...formData, title: e.target.value })
 						}
-						value={formData.title}
+						value={formData.title || ''}
 					/>
 					<Select
 						className='flex-1'

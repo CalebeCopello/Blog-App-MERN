@@ -69,11 +69,11 @@
 	--aqua1_dm: #8ec07c;
 	--orange1_dm: #fe8019;
 }
-input[type="file"]::file-selector-button {
+input[type='file']::file-selector-button {
 	color: var(--fg0_lm);
 	background: var(--orange0);
 }
-.dark input[type="file"]::file-selector-button {
+.dark input[type='file']::file-selector-button {
 	color: var(--fg0_dm);
 	background: var(--orange0);
 }
@@ -234,3 +234,51 @@ input[type="file"]::file-selector-button {
 	color: var(--fg0_dm);
 }
 /* end of react-quill config */
+/* post content style */
+.post-content p {
+	margin-bottom: 0.5rem;
+}
+.post-content h1 {
+	font-size: 1.8rem;
+	font-weight: 600;
+	font-family: YoungSerif;
+	margin: 1.5rem 0;
+}
+.post-content h2 {
+	font-size: 1.6rem;
+	font-family: YoungSerif;
+	margin: 1.5rem 0;
+}
+.post-content h3 {
+	font-size: 1.3rem;
+	font-family: YoungSerif;
+	margin: 1.5rem 0;
+}
+.post-content a {
+	color: var(--blue0);
+	text-decoration: none;
+}
+.post-content a:hover {
+	text-decoration: underline;
+}
+.post-content ul {
+	list-style-type: disc;
+	list-style-position: inside;
+}
+.post-content ol {
+	list-style-type: decimal;
+	list-style-position: inside;
+}
+.post-content ul ul,
+ol ul {
+	list-style-type: circle;
+	list-style-position: inside;
+	margin-left: 15px;
+}
+.post-content ol ol,
+ul ol {
+	list-style-type: lower-latin;
+	list-style-position: inside;
+	margin-left: 15px;
+}
+/* end of post content style */
