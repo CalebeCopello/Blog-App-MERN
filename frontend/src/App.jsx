@@ -12,11 +12,13 @@ import OnlyAdminPrivateRoute from './components/OnlyAdminPrivateRoute'
 import CreatePost from './screens/CreatePost'
 import UpdatePost from './screens/UpdatePost'
 import PostPage from './screens/PostPage'
+import ScrollToTop from './components/ScrollToTop'
 
 const App = () => {
 	return (
 		<>
 			<BrowserRouter>
+			<ScrollToTop />
 				<Header />
 				<Routes>
 					<Route
