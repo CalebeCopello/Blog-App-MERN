@@ -39,7 +39,7 @@ const Comment = ({ comment }) => {
 					</span>
 					<span className='text-xs'>{moment(comment.createdAt).fromNow()}</span>
 				</div>
-				<p className='pb-2'>{comment.content}</p>
+				<p className='pb-2 whitespace-pre-wrap'>{comment.content}</p>
 			</div>
 		</div>
 	)

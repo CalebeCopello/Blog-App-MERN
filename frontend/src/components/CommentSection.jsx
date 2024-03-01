@@ -101,6 +101,7 @@ function CommentSection({ postId }) {
 							maxLength={200}
 							onChange={(e) => setComment(e.target.value)}
 							value={comment}
+							className='whitespace-pre-wrap'
 						></Textarea>
 						<div className='flex justify-between items-center mt-5'>
 							<p>{200 - comment.length} caractere(s) restante(s).</p>
