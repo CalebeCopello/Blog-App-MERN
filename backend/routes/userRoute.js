@@ -5,7 +5,8 @@ import {
 	deleteUser,
 	signOutUser,
 	getUsers,
-    deleteUserAdmin,
+	deleteUserAdmin,
+	getUser,
 } from '../controller/userController.js'
 import verifyToken from '../utils/verifyToken.js'
 
@@ -17,5 +18,6 @@ router.delete('/delete/:userId', verifyToken, deleteUser)
 router.post('/signout', signOutUser)
 router.get('/getusers', verifyToken, getUsers)
 router.delete('/deleteuser/:userId', verifyToken, deleteUserAdmin)
+router.get('/:userId', getUser)
 
 export default router

@@ -2,12 +2,14 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Alert, Button, Textarea } from 'flowbite-react'
 import { buttonThemeConfig, textareaThemeConfig } from '../configs/theme'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import Comment from './Comment'
 
 // eslint-disable-next-line react/prop-types
 function CommentSection({ postId }) {
 	const { currentUser } = useSelector((state) => state.user)
 	const [comment, setComment] = useState('')
+	const [comments, setComments] = useState([])
 	const [commentError, setCommentError] = useState(null)
 	const handleSubmit = async (e) => {
 		e.preventDefault()
@@ -29,13 +31,28 @@ function CommentSection({ postId }) {
 			const data = res.json()
 			if (res.ok) {
 				setComment('')
-				console.log(data)
 				setCommentError(null)
+				setComments([data, ...comments])
 			}
 		} catch (error) {
 			setCommentError(error.message)
 		}
 	}
+
+	useEffect(() => {
+		const getComments = async () => {
+			try {
+				const res = await fetch(`/api/comment/getpostcomments/${postId}`)
+				if (res.ok) {
+					const data = await res.json()
+					setComments(data)
+				}
+			} catch (error) {
+				console.log(error.message)
+			}
+		}
+		getComments()
+	}, [postId])
 	return (
 		<div>
 			{currentUser ? (
@@ -78,7 +95,7 @@ function CommentSection({ postId }) {
 						className='border p-3 rounded-md border-orange1_lm dark:border-orange1_dm'
 					>
 						<Textarea
-                        theme={textareaThemeConfig}
+							theme={textareaThemeConfig}
 							placeholder='Escreva seu comentário...'
 							rows={3}
 							maxLength={200}
@@ -96,6 +113,21 @@ function CommentSection({ postId }) {
 						</div>
 					</form>
 					{commentError && <Alert color='failure'>{commentError}</Alert>}
+				</>
+			)}
+			{comments.length === 0 ? (
+				<p className='text-sm my-5'>{'Sem comentários :('}</p>
+			) : (
+				<>
+					<div className='text-sm my-5 flex items-center gap-1'>
+						<p>Comentários:</p>
+						<div className='border border-orange0 py-1 px-2 rounded-md'>
+							<p>{comments.length}</p>
+						</div>
+					</div>
+					{comments.map((comment,index) => (
+						<Comment key={index} comment={comment}/>
+					))}
 				</>
 			)}
 		</div>
