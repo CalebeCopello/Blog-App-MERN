@@ -52,27 +52,25 @@ function CommentSection({ postId }) {
 			}
 		}
 		getComments()
-	}, [postId, comment])
+	}, [postId, comments])
 	return (
-		<div>
+		<div className='max-w-2xl mx-auto w-full p-3'>
 			{currentUser ? (
 				<>
 					{' '}
-					<div className='max-w-2xl mx-auto w-full p-3'>
-						<div className='flex item-center gap-1 my-5 text-fg0_lm dark:text-fg0_dm text-sm'>
-							<p>Logado como:</p>{' '}
-							<img
-								className='h-5 w-5 object-cover rounded-full'
-								src={currentUser.profilePicture}
-								alt={currentUser.username}
-							/>
-							<Link
-								className='text-xs mt-0.5 hover:underline text-orange1_lm dark:text-orange1_dm'
-								to={'/dashboard?tab=profile'}
-							>
-								@{currentUser.username}
-							</Link>
-						</div>
+					<div className='flex item-center gap-1 my-5 text-fg0_lm dark:text-fg0_dm text-sm'>
+						<p>Logado como:</p>{' '}
+						<img
+							className='h-5 w-5 object-cover rounded-full'
+							src={currentUser.profilePicture}
+							alt={currentUser.username}
+						/>
+						<Link
+							className='text-xs mt-0.5 hover:underline text-orange1_lm dark:text-orange1_dm'
+							to={'/dashboard?tab=profile'}
+						>
+							@{currentUser.username}
+						</Link>
 					</div>
 				</>
 			) : (
@@ -112,12 +110,12 @@ function CommentSection({ postId }) {
 								Enviar
 							</Button>
 						</div>
+						{commentError && <Alert color='failure'>{commentError}</Alert>}
 					</form>
-					{commentError && <Alert color='failure'>{commentError}</Alert>}
 				</>
 			)}
 			{comments.length === 0 ? (
-				<p className='text-sm my-5'>{'Sem comentários :('}</p>
+				<p className='text-sm my-5'>{'Nenhum comentário :('}</p>
 			) : (
 				<>
 					<div className='text-sm my-5 flex items-center gap-1'>
@@ -126,8 +124,11 @@ function CommentSection({ postId }) {
 							<p>{comments.length}</p>
 						</div>
 					</div>
-					{comments.map((comment,index) => (
-						<Comment key={index} comment={comment}/>
+					{comments.map((comment) => (
+						<Comment
+							key={comment._id}
+							comment={comment}
+						/>
 					))}
 				</>
 			)}
