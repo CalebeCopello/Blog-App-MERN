@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Alert, Button, Textarea } from 'flowbite-react'
 import { buttonThemeConfig, textareaThemeConfig } from '../configs/theme'
 import { useEffect, useState } from 'react'
@@ -7,7 +7,9 @@ import Comment from './Comment'
 
 // eslint-disable-next-line react/prop-types
 function CommentSection({ postId }) {
+	const navigate = useNavigate()
 	const { currentUser } = useSelector((state) => state.user)
+	const [newComment, setNewComment] = useState(false)
 	const [comment, setComment] = useState('')
 	const [comments, setComments] = useState([])
 	const [commentError, setCommentError] = useState(null)
@@ -33,14 +35,46 @@ function CommentSection({ postId }) {
 				setComment('')
 				setCommentError(null)
 				setComments([data, ...comments])
+				setNewComment(true)
 			}
 		} catch (error) {
 			setCommentError(error.message)
 		}
 	}
-
+	const handleLike = async (commentId) => {
+		console.log(commentId)
+		try {
+			if (!currentUser) {
+				navigate('/signin')
+				return
+			}
+			const res = await fetch(`/api/comment/likecomment/${commentId}`, {
+				method: 'PUT',
+			})
+			if (res.ok) {
+				const data = await res.json()
+				setComments(
+					comments.map((comment) =>
+						comment._id === commentId
+							? {
+									...comment,
+									likes: data.likes,
+									numberOfLikes: data.likes.length,
+							  }
+							: comment
+					)
+				)
+				console.log(data)
+			}
+		} catch (error) {
+			console.log(error.message)
+		}
+	}
 	useEffect(() => {
 		const getComments = async () => {
+			if (newComment) {
+				setNewComment(false)
+			}
 			try {
 				const res = await fetch(`/api/comment/getpostcomments/${postId}`)
 				if (res.ok) {
@@ -52,7 +86,7 @@ function CommentSection({ postId }) {
 			}
 		}
 		getComments()
-	}, [postId, comments])
+	}, [postId, newComment])
 	return (
 		<div className='max-w-2xl mx-auto w-full p-3'>
 			{currentUser ? (
@@ -128,6 +162,7 @@ function CommentSection({ postId }) {
 						<Comment
 							key={comment._id}
 							comment={comment}
+							onLike={handleLike}
 						/>
 					))}
 				</>
