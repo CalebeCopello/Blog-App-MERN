@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react'
 import moment from 'moment'
 import 'moment/dist/locale/pt-br'
@@ -5,7 +6,7 @@ import 'moment/dist/locale/pt-br'
 moment().locale('pt-br')
 const Comment = ({ comment }) => {
 	const [user, setUser] = useState({})
-	//FIX: //BUG: comment.userId is undefined, only fetches after reload
+
 	useEffect(() => {
 		const getUser = async () => {
 			try {

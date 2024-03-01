@@ -52,7 +52,7 @@ function CommentSection({ postId }) {
 			}
 		}
 		getComments()
-	}, [postId])
+	}, [postId, comment])
 	return (
 		<div>
 			{currentUser ? (
