@@ -62,16 +62,21 @@ function PostPage() {
 			<img
 				src={post && post.image}
 				alt={post && post.title}
-				className='mt-10 p-3 max-h-[600px] w-full object-cover'
+				className='mt-10 p-3 max-h-[600px] w-full object-cover bg-bg0_h_lm'
 			/>
-            <div className='flex justify-between p-3 border-b border-orange0 mx-auto w-full max-w-2xl text-xs'>
-                <span>{post && new Date(post.createdAt).toLocaleDateString()}</span>
-                <span className='italic'>{post && (post.content.length /1000).toFixed(0) > 1 ? ((post.content.length /1000).toFixed(0) + 'minuto(s) de leitura') : 'menos de 1 minuto de leitura'}</span>
-            </div>
-            <div className='p-3 max-w-2xl mx-auto w-full post-content' dangerouslySetInnerHTML={{__html: post && post.content}}>
-
-            </div>
-			<CommentSection postId={post._id}/>
+			<div className='flex justify-between p-3 border-b border-orange0 mx-auto w-full max-w-2xl text-xs'>
+				<span>{post && new Date(post.createdAt).toLocaleDateString()}</span>
+				<span className='italic'>
+					{post && (post.content.length / 1000).toFixed(0) > 1
+						? (post.content.length / 1000).toFixed(0) + 'minuto(s) de leitura'
+						: 'menos de 1 minuto de leitura'}
+				</span>
+			</div>
+			<div
+				className='p-3 max-w-2xl mx-auto w-full post-content'
+				dangerouslySetInnerHTML={{ __html: post && post.content }}
+			></div>
+			<CommentSection postId={post._id} />
 		</main>
 	)
 }

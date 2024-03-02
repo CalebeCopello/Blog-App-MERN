@@ -60,7 +60,7 @@ function CommentSection({ postId }) {
 									...comment,
 									likes: data.likes,
 									numberOfLikes: data.likes.length,
-							  }
+							}
 							: comment
 					)
 				)
@@ -124,7 +124,7 @@ function CommentSection({ postId }) {
 				<>
 					<form
 						onSubmit={handleSubmit}
-						className='border p-3 rounded-md border-orange1_lm dark:border-orange1_dm'
+						className='border p-3 rounded-md border-orange1_lm dark:border-orange1_dm bg-bg2_lm dark:bg-bg2_dm shadow-lg'
 					>
 						<Textarea
 							theme={textareaThemeConfig}
@@ -136,7 +136,7 @@ function CommentSection({ postId }) {
 							className='whitespace-pre-wrap'
 						></Textarea>
 						<div className='flex justify-between items-center mt-5'>
-							<p>{200 - comment.length} caractere(s) restante(s).</p>
+							<p>{200 - comment.length} caracter{200 - comment.length > 1 && 'es'} restante{200 - comment.length > 1 && 's'}.</p>
 							<Button
 								theme={buttonThemeConfig}
 								type='submit'
@@ -153,8 +153,8 @@ function CommentSection({ postId }) {
 			) : (
 				<>
 					<div className='text-sm my-5 flex items-center gap-1'>
-						<p>Comentários:</p>
-						<div className='border border-orange0 py-1 px-2 rounded-md'>
+						<p>Comentário{comments.length > 1 && 's'}:</p>
+						<div className='border border-orange0 py-1 px-2 rounded-md bg-bg0_h_lm dark:bg-bg0_h_dm'>
 							<p>{comments.length}</p>
 						</div>
 					</div>

@@ -74,7 +74,7 @@ const DashPosts = () => {
 		}
 	}, [currentUser._id])
 	return (
-		<div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-fg2_lm scrollbar-thumb-orange0 dark:scrollbar-track-fg2_dm'>
+		<div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-fg2_dm scrollbar-thumb-orange0 dark:scrollbar-track-fg2_lm'>
 			{currentUser.isAdmin && userPosts.length > 0 ? (
 				<>
 					<Table
