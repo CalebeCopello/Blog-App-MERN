@@ -70,6 +70,13 @@ function CommentSection({ postId }) {
 			console.log(error.message)
 		}
 	}
+	const handleEdit = async (comment, editedContent) => {
+		setComments(
+			comments.map((c) =>
+				c._id === comment._id ? { ...c, content: editedContent } : c
+			)
+		)
+	}
 	useEffect(() => {
 		const getComments = async () => {
 			if (newComment) {
@@ -136,7 +143,11 @@ function CommentSection({ postId }) {
 							className='whitespace-pre-wrap'
 						></Textarea>
 						<div className='flex justify-between items-center mt-5'>
-							<p>{200 - comment.length} caracter{200 - comment.length > 1 && 'es'} restante{200 - comment.length > 1 && 's'}.</p>
+							<p>
+								{200 - comment.length} caracter
+								{200 - comment.length > 1 && 'es'} restante
+								{200 - comment.length > 1 && 's'}.
+							</p>
 							<Button
 								theme={buttonThemeConfig}
 								type='submit'
@@ -163,6 +174,7 @@ function CommentSection({ postId }) {
 							key={comment._id}
 							comment={comment}
 							onLike={handleLike}
+							onEdit={handleEdit}
 						/>
 					))}
 				</>
