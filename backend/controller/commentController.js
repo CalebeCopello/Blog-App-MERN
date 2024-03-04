@@ -81,5 +81,28 @@ const editComment = async (req, res, next) => {
 		next(error)
 	}
 }
+const deleteComment = async (req, res, next) => {
+	try {
+		const comment = await Comment.findById(req.params.commentId)
+		if (!comment) {
+			return next(errorHandler(404, 'Comentário não encontrado'))
+		}
+		if (comment.userId !== req.user.id && !req.user.isAdmin) {
+			return next(
+				errorHandler(403, 'Você não tem permissão para editar esse comentário')
+			)
+		}
+		await Comment.findByIdAndDelete(req.params.commentId)
+		res.status(200).json('O comentário foi deletado')
+	} catch (error) {
+		next(error)
+	}
+}
 
-export { createComment, getPostComments, likeComment, editComment }
+export {
+	createComment,
+	getPostComments,
+	likeComment,
+	editComment,
+	deleteComment,
+}
