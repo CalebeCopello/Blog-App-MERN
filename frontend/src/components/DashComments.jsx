@@ -17,7 +17,6 @@ const DashComments = () => {
 	const [commentIdToDelete, setCommentIdToDelete] = useState(null)
 	const handleShowMore = async () => {
 		const startIndex = comments.length
-		console.log(startIndex)
 		try {
 			const res = await fetch(
 				`/api/comment/getcomments?startIndex=${startIndex}`
@@ -72,7 +71,6 @@ const DashComments = () => {
 		if (currentUser.isAdmin) {
 			fetchComments()
 		}
-        console.log(comments)
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentUser._id])
 	return (

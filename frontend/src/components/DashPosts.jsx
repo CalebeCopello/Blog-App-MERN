@@ -72,6 +72,7 @@ const DashPosts = () => {
 		if (currentUser.isAdmin) {
 			fetchPosts()
 		}
+			// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentUser._id])
 	return (
 		<div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-fg2_dm scrollbar-thumb-orange0 dark:scrollbar-track-fg2_lm'>
