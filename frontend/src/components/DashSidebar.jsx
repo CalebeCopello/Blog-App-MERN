@@ -5,6 +5,7 @@ import { sidebarThemeConfig } from '../configs/theme'
 import {
 	HiAnnotation,
 	HiArrowSmLeft,
+	HiChartPie,
 	HiDocumentText,
 	HiOutlineUserGroup,
 	HiUser,
@@ -57,8 +58,17 @@ const DashSidebar = () => {
 							Profile
 						</Sidebar.Item>
 					</Link>
-					{currentUser.isAdmin && (
+					{currentUser && currentUser.isAdmin && (
 						<>
+							<Link to='/dashboard?tab=dash'>
+								<Sidebar.Item
+									active={tab === 'dash'}
+									icon={HiChartPie}
+									as='div'
+								>
+									DashBoard
+								</Sidebar.Item>
+							</Link>
 							<Link to='/dashboard?tab=posts'>
 								<Sidebar.Item
 									active={tab === 'posts'}
