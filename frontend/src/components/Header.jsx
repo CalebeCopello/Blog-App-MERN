@@ -6,7 +6,7 @@ import {
 	Avatar,
 	DarkThemeToggle,
 } from 'flowbite-react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AiOutlineSearch } from 'react-icons/ai'
 // import { FaMoon, FaSun } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux'
@@ -19,9 +19,13 @@ import {
 	dropdownThemeConfig,
 } from '../configs/theme.js'
 import { signOutSuccess } from '../slices/userSlice.js'
+import { useEffect, useState } from 'react'
 
 const Header = () => {
+	const [searchTerm, setSearchTerm] = useState('')
 	const path = useLocation().pathname
+	const location = useLocation()
+	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const { currentUser } = useSelector((state) => state.user)
 	// const { theme } = useSelector((state) => state.theme)
@@ -40,6 +44,20 @@ const Header = () => {
 			console.log(error.message)
 		}
 	}
+	const handleSubmit =  (e) => {
+		e.preventDefault()
+		const urlParams = new URLSearchParams(location.search)
+		urlParams.set('searchTerm', searchTerm)
+		const searchQuery = urlParams.toString()
+		navigate(`/search?${searchQuery}`)
+	}
+	useEffect(() => {
+		const urlParams = new URLSearchParams(location.search)
+		const searchTermFromUrl = urlParams.get('searchTerm')
+		if (searchTermFromUrl) {
+			setSearchTerm(searchTermFromUrl)
+		}
+	}, [location.search])
 	return (
 		<Navbar
 			theme={navbarThemeConfig}
@@ -54,7 +72,7 @@ const Header = () => {
 				</span>
 				Blog
 			</Link>
-			<form>
+			<form onSubmit={handleSubmit}>
 				<TextInput
 					theme={textInputThemeConfig}
 					type='text'
@@ -62,6 +80,8 @@ const Header = () => {
 					rightIcon={AiOutlineSearch}
 					shadow
 					className='hidden lg:inline'
+					value={searchTerm}
+					onChange={(e) => setSearchTerm(e.target.value)}
 				/>
 			</form>
 			<Button

@@ -13,6 +13,7 @@ import CreatePost from './screens/CreatePost'
 import UpdatePost from './screens/UpdatePost'
 import PostPage from './screens/PostPage'
 import ScrollToTop from './components/ScrollToTop'
+import Search from './screens/Search'
 
 const App = () => {
 	return (
@@ -36,6 +37,10 @@ const App = () => {
 					<Route
 						path='/signup'
 						element={<SignUp />}
+					/>
+					<Route
+						path='/search'
+						element={<Search />}
 					/>
 					<Route element={<PrivateRoute />}>
 						<Route
